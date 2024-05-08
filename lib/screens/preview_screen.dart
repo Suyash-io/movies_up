@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:movies_up/models/movies_model.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 
 class PreviewScreen extends StatelessWidget {
-  const PreviewScreen({super.key,required this.moviesModel,required this.index});
+  const PreviewScreen({super.key,required this.moviesModel,});
   final MoviesModel moviesModel;
-  final int index;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -39,8 +36,8 @@ class PreviewScreen extends StatelessWidget {
                       Flexible(child: Card(
                         clipBehavior: Clip.hardEdge,
                         child: Hero(
-                          tag: 'hero$index',
-                          child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: moviesModel.poster??'', height:size.height * 0.3,),
+                          tag: moviesModel.title??0,
+                          child: moviesModel.poster! =='N/A'?Image.asset('assets/images/splashbg1.jpg') :FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: moviesModel.poster??'', height:size.height * 0.3,),
                         ),
                       )),
                       Flexible(child: SizedBox(
@@ -59,7 +56,7 @@ class PreviewScreen extends StatelessWidget {
                             SizedBox(height: size.height * 0.01,),
                             Text('Director : ${moviesModel.director}',style: TextStyle(fontSize: size.height * 0.025),maxLines: 2,overflow: TextOverflow.ellipsis,),
                             SizedBox(height: size.height * 0.01,),
-                            Text('Available In : ${moviesModel.language}'??'-',style: TextStyle(fontSize: size.height * 0.025),maxLines: 2,overflow: TextOverflow.ellipsis,),
+                            Text('Available In : ${moviesModel.language}',style: TextStyle(fontSize: size.height * 0.025),maxLines: 2,overflow: TextOverflow.ellipsis,),
                           ],
                         ),
                       ))
@@ -87,7 +84,7 @@ class PreviewScreen extends StatelessWidget {
                   Flexible(child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 3),
                     child: Text(
-                      'Actors : ${moviesModel.awards}',
+                      'Awards : ${moviesModel.awards}',
                       style: TextStyle(fontSize: size.height * 0.024,fontWeight: FontWeight.w400,color: Colors.black),
                       textAlign: TextAlign.left,
                     ),

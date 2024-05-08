@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movies_up/controllers/home_sceen_controller.dart';
+import 'package:movies_up/controllers/home_screen_controller.dart';
 import 'package:movies_up/screens/preview_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
             width: size.width,
             child: homeScreenCtr.moviesList.isNotEmpty ?ListView.builder(itemBuilder: (context,index) {
               return GestureDetector(
-                onTap: () => Get.to(()=> PreviewScreen(moviesModel: homeScreenCtr.moviesList[index],index: index,)),
+                onTap: () => Get.to(()=> PreviewScreen(moviesModel: homeScreenCtr.moviesList[index],)),
                 child: Container(
                   width: size.width * 0.4,
                   margin: const EdgeInsets.only(right: 5),
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Card(clipBehavior: Clip.hardEdge,child: Hero(tag: 'hero$index',child: FadeInImage.memoryNetwork(image:homeScreenCtr.moviesList[index].poster??'-', placeholder: kTransparentImage,height: size.height * 0.25,fit: BoxFit.cover,))),
+                      Card(clipBehavior: Clip.hardEdge,child: Hero(tag: homeScreenCtr.moviesList[index].title??index,child: FadeInImage.memoryNetwork(image:homeScreenCtr.moviesList[index].poster??'-', placeholder: kTransparentImage,height: size.height * 0.25,fit: BoxFit.cover,))),
                       Text(homeScreenCtr.moviesList[index].title??'-'),
                       Text('imdb Rating : ${homeScreenCtr.moviesList[index].imdbRating}',overflow: TextOverflow.ellipsis,),
                     ],
@@ -114,7 +114,7 @@ class HomeScreen extends StatelessWidget {
             width: size.width,
             child: homeScreenCtr.seriesList.isNotEmpty ?ListView.builder(itemBuilder: (context,index) {
               return GestureDetector(
-                onTap: () => Get.to(()=> PreviewScreen(moviesModel: homeScreenCtr.seriesList[index],index: index,)),
+                onTap: () => Get.to(()=> PreviewScreen(moviesModel: homeScreenCtr.seriesList[index],)),
                 child: Container(
                   width: size.width * 0.4,
                   margin: const EdgeInsets.only(right: 5),
@@ -124,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Card(clipBehavior: Clip.hardEdge,child: FadeInImage.memoryNetwork(image:homeScreenCtr.seriesList[index].poster??'-', placeholder: kTransparentImage,height: size.height * 0.25,fit: BoxFit.cover,)),
+                      Card(clipBehavior: Clip.hardEdge,child: Hero(tag: homeScreenCtr.seriesList[index].title??index,child: FadeInImage.memoryNetwork(image:homeScreenCtr.seriesList[index].poster??'-', placeholder: kTransparentImage,height: size.height * 0.25,fit: BoxFit.cover,))),
                       Text(homeScreenCtr.seriesList[index].title??'-'),
                       Text('imdb Rating : ${homeScreenCtr.seriesList[index].imdbRating}',overflow: TextOverflow.ellipsis,),
                     ],
@@ -163,7 +163,7 @@ class HomeScreen extends StatelessWidget {
             width: size.width,
             child: homeScreenCtr.animeList.isNotEmpty ?ListView.builder(itemBuilder: (context,index) {
               return GestureDetector(
-                onTap: () => Get.to(()=> PreviewScreen(moviesModel: homeScreenCtr.animeList[index],index: index,)),
+                onTap: () => Get.to(()=> PreviewScreen(moviesModel: homeScreenCtr.animeList[index])),
                 child: Container(
                   width: size.width * 0.4,
                   margin: const EdgeInsets.only(right: 5),
@@ -173,7 +173,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Card(clipBehavior: Clip.hardEdge,child: FadeInImage.memoryNetwork(image:homeScreenCtr.animeList[index].poster??'-', placeholder: kTransparentImage,height: size.height * 0.25,fit: BoxFit.cover,)),
+                      Card(clipBehavior: Clip.hardEdge,child: Hero(tag: homeScreenCtr.animeList[index].title??index,child: FadeInImage.memoryNetwork(image:homeScreenCtr.animeList[index].poster??'-', placeholder: kTransparentImage,height: size.height * 0.25,fit: BoxFit.cover,))),
                       Text(homeScreenCtr.animeList[index].title??'-'),
                       Text('imdb Rating : ${homeScreenCtr.animeList[index].imdbRating}',overflow: TextOverflow.ellipsis,),
                     ],

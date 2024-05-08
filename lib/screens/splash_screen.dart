@@ -1,8 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_up/screens/home_screen.dart';
+
+import '../controllers/home_screen_controller.dart';
+import 'home_screen2.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,7 +16,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final Connectivity _connectivity = Connectivity();
-
+  final homeScreenCtr = Get.put(HomeScreenController());
   @override
   void initState() {
     // TODO: implement initState
@@ -26,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       result = await _connectivity.checkConnectivity();
       if(result.contains(ConnectivityResult.mobile) || result.contains(ConnectivityResult.wifi)){
         Future.delayed(const Duration(milliseconds: 1200),() {
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> HomeScreen()), (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> HomeScreen2()), (route) => false);
         });
       }else{
         internetPop();

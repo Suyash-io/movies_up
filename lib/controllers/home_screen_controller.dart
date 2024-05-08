@@ -45,7 +45,6 @@ class HomeScreenController extends GetxController{
     print('loadMovies called');
     if(prefs.containsKey(GlobalVars.moviesPrefKey)) {
       String jsonData = prefs.getString(GlobalVars.moviesPrefKey)??'';
-      print(jsonData);
       moviesList.value = await fetchListDataPrefs(jsonDecode(jsonData));//MoviesModel.getMoviesListFromJson(jsonDecode(jsonData));
     }else{
       // await compute(fetchDataApi, GlobalVars.mostPopularMovies);
@@ -58,6 +57,7 @@ class HomeScreenController extends GetxController{
       "imdbItems" :moviesList
     };
     prefs.setString(GlobalVars.moviesPrefKey, jsonEncode(data));
+    GlobalVars.popularMovies = moviesList;
   }
 
   void loadSeries() async {
